@@ -29,15 +29,30 @@ const typeLabels = {
 const formatCurrency = (value) => `$${value.toLocaleString()}`;
 
 const saveState = () => {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  } catch (error) {
+    console.warn("Unable to save state:", error);
+  }
 };
 
 const loadState = () => {
-  const saved = localStorage.getItem(STORAGE_KEY);
-  if (!saved) return;
-  const parsed = JSON.parse(saved);
-  state.tasks = parsed.tasks || [];
-  state.goal = parsed.goal || defaultGoal;
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (!saved) return;
+    const parsed = JSON.parse(saved);
+    state.tasks = parsed.tasks || [];
+    state.goal = parsed.goal || defaultGoal;
+  } catch (error) {
+    console.warn("Unable to load saved state:", error);
+  }
+};
+
+const generateId = () => {
+  if (crypto?.randomUUID) {
+    return crypto.randomUUID();
+  }
+  return `task-${Date.now()}-${Math.random().toString(16).slice(2)}`;
 };
 
 const updateBreakdown = () => {
@@ -132,7 +147,7 @@ const handleFormSubmit = (event) => {
   }
 
   addTask({
-    id: crypto.randomUUID(),
+    id: generateId(),
     title,
     amount,
     type,
@@ -179,7 +194,7 @@ const loadSampleTasks = () => {
 
   state.tasks = samples.map((sample) => ({
     ...sample,
-    id: crypto.randomUUID(),
+    id: generateId(),
     due: "Due this week",
   }));
   saveState();
