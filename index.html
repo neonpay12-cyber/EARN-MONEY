@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Earn Money</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="hero">
+        <div>
+          <p class="badge">Earn Smart</p>
+          <h1>Earn Money Planner</h1>
+          <p class="subtitle">
+            Turn daily wins into real cash goals. Track gigs, complete tasks, and
+            watch your balance grow.
+          </p>
+          <div class="hero-actions">
+            <button class="primary" id="addSample">Load sample tasks</button>
+            <button class="ghost" id="resetAll">Reset</button>
+          </div>
+        </div>
+        <div class="balance-card">
+          <p>Current balance</p>
+          <h2 id="balance">$0</h2>
+          <div class="progress">
+            <div class="progress-bar" id="goalProgress"></div>
+          </div>
+          <p class="goal">Goal: <span id="goalAmount">$500</span></p>
+          <div class="goal-input">
+            <input id="goalInput" type="number" min="0" placeholder="Update goal" />
+            <button class="secondary" id="updateGoal">Update</button>
+          </div>
+        </div>
+      </header>
+
+      <main>
+        <section class="card">
+          <h3>Add a new earning task</h3>
+          <form id="taskForm" class="task-form">
+            <input
+              type="text"
+              id="taskTitle"
+              placeholder="Task name (e.g., Design logo)"
+              required
+            />
+            <input
+              type="number"
+              id="taskValue"
+              placeholder="Amount ($)"
+              min="1"
+              required
+            />
+            <select id="taskType">
+              <option value="gigs">Gig</option>
+              <option value="sales">Sale</option>
+              <option value="investments">Investment</option>
+              <option value="learning">Learning</option>
+            </select>
+            <button class="primary" type="submit">Add task</button>
+          </form>
+        </section>
+
+        <section class="grid">
+          <div class="card">
+            <div class="card-header">
+              <h3>Active tasks</h3>
+              <span class="count" id="taskCount">0</span>
+            </div>
+            <ul id="taskList" class="task-list"></ul>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h3>Earnings breakdown</h3>
+              <span class="count" id="earningsTotal">$0</span>
+            </div>
+            <ul class="breakdown" id="breakdownList"></ul>
+          </div>
+        </section>
+
+        <section class="card tips">
+          <h3>Earn faster tips</h3>
+          <div class="tips-grid">
+            <article>
+              <h4>Stack micro-gigs</h4>
+              <p>Combine small freelance tasks to hit daily income targets.</p>
+            </article>
+            <article>
+              <h4>Upsell deliverables</h4>
+              <p>Offer maintenance or add-ons to increase invoice totals.</p>
+            </article>
+            <article>
+              <h4>Track learning ROI</h4>
+              <p>Log courses that unlock higher-paying opportunities.</p>
+            </article>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
